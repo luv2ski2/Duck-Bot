@@ -28,7 +28,7 @@ async def on_ready():
 async def on_message(message):
     if message.content == "!ducks":
         # Can't be called from the devotion channel
-        if message.channel.name == "gaming":
+        if message.channel.name == "temple":
             return
         send = ""
         users = duckLogger.getInfo()

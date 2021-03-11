@@ -41,6 +41,8 @@ def writeInfo(users):
     f.write(returnUsers)
     f.close()
 
+# Luv2ski2-22|DuckBot-3|Mr_Jankman-1
+
 # Main, used for testing
 if __name__ == "__main__":
     james = User("james", 0)
