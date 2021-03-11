@@ -36,6 +36,9 @@ async def on_message(message):
             send = send + f'{user.name} has devoted {user.timesDucked} times\n'
         await message.channel.send(send)
 
+    if message.content == "H":
+        await message.channel.send("It's working")
+
     if message.channel.name == "gaming":
         # If bot sends message, doesn't count
         if message.author == client.user:
