@@ -1,6 +1,6 @@
 import os
 import asyncio
-
+# minecraft
 import discord
 from dotenv import load_dotenv
 
