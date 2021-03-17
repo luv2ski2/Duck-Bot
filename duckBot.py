@@ -5,7 +5,13 @@ import discord
 from dotenv import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
 
-db = SQLAlchemy()
+from flask import Flask
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
+db = SQLAlchemy(app)
+
+# db = SQLAlchemy()
 
 class DiscordUser(db.Model):
     id = db.Column(db.INTEGER, primary_key=True)
