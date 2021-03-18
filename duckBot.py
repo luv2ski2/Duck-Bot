@@ -3,23 +3,51 @@ import asyncio
 # minecraft
 import discord
 from dotenv import load_dotenv
-from flask_sqlalchemy import SQLAlchemy
 
-from flask import Flask
+from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
-db = SQLAlchemy(app)
+# CTRL + SHIFT + P to open command line, sql open test.db
 
-# db = SQLAlchemy()
+Base = declarative_base()
 
-class DiscordUser(db.Model):
-    id = db.Column(db.INTEGER, primary_key=True)
-    name = db.Column(db.String(200), nullable=False)
-    timesDucked = db.Column(db.INTEGER, default=1)
+class DiscordUser(Base):
+    __tablename__ = "discorduser"
 
-    def __repr__(self):
-        return '<Task %r>' % self.id
+    id = Column('id', Integer, primary_key=True)
+    name = Column('username', String)
+    timesDucked = Column('timesDucked', Integer, default = 1)
+
+
+engine = create_engine('sqlite:///users.db', echo=True)
+Base.metadata.create_all(bind=engine)
+
+Session = sessionmaker(bind=engine)
+
+session = Session()
+
+# user = DiscordUser()
+# user.name = "Tester"
+
+# session.add(user)
+# session.commit()
+
+# user = session.query(DiscordUser).get(1)
+# print(user.name)
+#
+# user.name = "hello there"
+# print(user.name)
+# user.timesDucked += 1
+#
+# session.commit()
+
+# users = session.query(DiscordUser).all()
+# for user in users:
+#     print(user.name)
+
+# session.close()
+
 
 # Contains the classes and functions used to log the duck counts to a file, like a database
 import duckLogger
@@ -56,7 +84,7 @@ async def on_message(message):
         if message.channel.name == "temple":
             return
         send = ""
-        users = DiscordUser.query.all()
+        users = session.query(DiscordUser).all()
         # users = duckLogger.getInfo()
         for user in users:
             send = send + f'{user.name} has devoted {user.timesDucked} times\n'
@@ -71,7 +99,7 @@ async def on_message(message):
             return
 
         # users = duckLogger.getInfo()
-        users = DiscordUser.query.all()
+        users = session.query(DiscordUser).all()
         # for user in users:
         #     print(user.formatReturn())
         # userID = duckLogger.inUserList(message.author.name, users)
@@ -82,26 +110,27 @@ async def on_message(message):
         if userID == "no user with that name":
             print("|||||||")
             newUser = DiscordUser(name=message.author.name)
-            db.session.add(newUser)
-            db.session.commit()
+            session.add(newUser)
+            session.commit()
 
 
             # user = duckLogger.User(message.author.name, 1)
             # users.append(user)
         else:
             print("-------")
-            user = DiscordUser.query.get_or_404(userID)
+            user = session.query(DiscordUser).get(userID)
             user.timesDucked += 1
-            db.session.commit()
+            session.commit()
 
             # users[userID].timesDucked = int(users[userID].timesDucked) + 1
             # print(users[userID].timesDucked)
-        duckLogger.writeInfo(users)
+        # duckLogger.writeInfo(users)
         print('hi')
     else:
         print('hello')
 
     print(message.content)
+    session.close()
 
 
 client.run(TOKEN)
