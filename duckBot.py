@@ -58,7 +58,7 @@ import duckLogger
 TOKEN = os.getenv('DUCK_TOKEN')
 
 # Monke token, used for testing.
-TOKEN = os.getenv('TEST_TOKEN')
+# TOKEN = os.getenv('TEST_TOKEN')
 # print(TOKEN)
 
 client = discord.Client()
