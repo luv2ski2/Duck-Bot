@@ -90,6 +90,7 @@ async def on_message(message):
             for user in users:
                 session.delete(user)
             session.commit()
+            await message.channel.send("Duck counts deleted!")
 
     if message.content == "!ducks":
         # Can't be called from the devotion channel
