@@ -87,8 +87,8 @@ async def on_message(message):
     if message.content == "!reset":
         if message.author == "God King James" or message.author == "rianjohnsonstan <3 UwU":
             users = session.query(DiscordUser).all()
-            for i in range(len(users)):
-                session.delete(users[i])
+            for user in users:
+                session.delete(user)
             session.commit()
 
     if message.content == "!ducks":
