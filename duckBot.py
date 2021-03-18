@@ -54,8 +54,10 @@ import duckLogger
 
 # Adds environment variables
 # Will remove load_dotenv() if I host it on Heroku
-load_dotenv()
-# TOKEN = os.getenv('DUCK_TOKEN')
+# load_dotenv()
+TOKEN = os.getenv('DUCK_TOKEN')
+
+# Monke token, used for testing.
 TOKEN = os.getenv('TEST_TOKEN')
 # print(TOKEN)
 
