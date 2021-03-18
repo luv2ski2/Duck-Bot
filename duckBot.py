@@ -54,9 +54,9 @@ import duckLogger
 
 # Adds environment variables
 # Will remove load_dotenv() if I host it on Heroku
-# load_dotenv()
-TOKEN = os.getenv('DUCK_TOKEN')
-
+load_dotenv()
+# TOKEN = os.getenv('DUCK_TOKEN')
+TOKEN = os.getenv('TEST_TOKEN')
 # print(TOKEN)
 
 client = discord.Client()
@@ -93,7 +93,7 @@ async def on_message(message):
     if message.content == "H":
         await message.channel.send("It's working")
 
-    if message.channel.name == "gaming":
+    if message.channel.name == "temple":
         # If bot sends message, doesn't count
         if message.author == client.user:
             return
@@ -104,7 +104,7 @@ async def on_message(message):
         #     print(user.formatReturn())
         # userID = duckLogger.inUserList(message.author.name, users)
 
-        userID = inDatabase(message.author.name)
+        userID = inDatabase(message.author.name, users)
         print(userID)
 
         if userID == "no user with that name":
