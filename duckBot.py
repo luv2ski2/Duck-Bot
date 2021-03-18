@@ -89,6 +89,7 @@ async def on_message(message):
             users = session.query(DiscordUser).all()
             for i in range(len(users)):
                 session.delete(users[i])
+                session.commit()
 
     if message.content == "!ducks":
         # Can't be called from the devotion channel
