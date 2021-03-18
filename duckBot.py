@@ -77,10 +77,19 @@ def inDatabase(name, users):
 
 @client.event
 async def on_ready():
+    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name='My amazing King James UwU <3'))
+
     print(f'{client.user} has connected to Discord!')
 
 @client.event
 async def on_message(message):
+    # Reset function
+    if message.content == "!reset":
+        if message.author == "God King James" or message.author == "rianjohnsonstan <3 UwU":
+            users = session.query(DiscordUser).all()
+            for i in range(len(users)):
+                session.delete(users[i])
+
     if message.content == "!ducks":
         # Can't be called from the devotion channel
         if message.channel.name == "temple":
