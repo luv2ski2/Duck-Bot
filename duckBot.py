@@ -20,7 +20,8 @@ class DiscordUser(Base):
     timesDucked = Column('timesDucked', Integer, default = 1)
 
 
-engine = create_engine('sqlite:///users.db', echo=True)
+# engine = create_engine('sqlite:///users.db', echo=True)
+engine = create_engine("postgres://mrsakxiwlghqjb:9422c75f108007d4b08108af3ef18139cb772297d8b99a5c9acacd9f76f65e8e@ec2-3-234-85-177.compute-1.amazonaws.com:5432/d6ft8e3ffr4u9h", echo=False)
 Base.metadata.create_all(bind=engine)
 
 Session = sessionmaker(bind=engine)
@@ -54,7 +55,8 @@ import duckLogger
 
 # Adds environment variables
 # Will remove load_dotenv() if I host it on Heroku
-load_dotenv()
+
+# load_dotenv()
 TOKEN = os.getenv('DUCK_TOKEN')
 
 # Monke token, used for testing.
