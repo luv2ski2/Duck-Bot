@@ -12,6 +12,8 @@ from sqlalchemy.orm import sessionmaker
 
 Base = declarative_base()
 
+DATABASE = os.getenv("DATABASE_URL")
+
 class DiscordUser(Base):
     __tablename__ = "discorduser"
 
@@ -21,7 +23,7 @@ class DiscordUser(Base):
 
 
 # engine = create_engine('sqlite:///users.db', echo=True)
-engine = create_engine("postgres://mrsakxiwlghqjb:9422c75f108007d4b08108af3ef18139cb772297d8b99a5c9acacd9f76f65e8e@ec2-3-234-85-177.compute-1.amazonaws.com:5432/d6ft8e3ffr4u9h", echo=False)
+engine = create_engine(DATABASE, echo=False)
 Base.metadata.create_all(bind=engine)
 
 Session = sessionmaker(bind=engine)
@@ -58,6 +60,7 @@ import duckLogger
 
 # load_dotenv()
 TOKEN = os.getenv('DUCK_TOKEN')
+# DATABASE = os.getenv("DATABASE_URL")
 
 # Monke token, used for testing.
 # TOKEN = os.getenv('TEST_TOKEN')
