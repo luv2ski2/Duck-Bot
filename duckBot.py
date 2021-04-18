@@ -16,7 +16,9 @@ Base = declarative_base()
 
 # DATABASE = os.getenv("DATABASE_URL")
 # DATABASE = 'postgresql://mrsakxiwlghqjb:9422c75f108007d4b08108af3ef18139cb772297d8b99a5c9acacd9f76f65e8e@ec2-3-234-85-177.compute-1.amazonaws.com:5432/d6ft8e3ffr4u9h'
-DATABASE = os.environ.get('DATABASE_URL?sslmode=require')
+# DATABASE = os.environ.get('DATABASE_URL?sslmode=require')
+
+DATABASE = os.getenv("DATABASE")
 
 class DiscordUser(Base):
     __tablename__ = "discorduser"
