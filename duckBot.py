@@ -105,7 +105,7 @@ async def on_ready():
 async def on_message(message):
     # Reset function
     if message.content == "!reset":
-        if message.author.name == "God King James" or message.author.name == "rianjohnsonstan <3 UwU" or message.author.name == "Luv2ski2" or message.author.name == "Ian":
+        if message.author.name == "Tigersol" or message.author.name == "rianjohnsonstan <3 UwU" or message.author.name == "Luv2ski2" or message.author.name == "Ian":
             users = session.query(DiscordUser).all()
             for user in users:
                 session.delete(user)
