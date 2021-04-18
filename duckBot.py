@@ -8,6 +8,8 @@ from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
+import psycopg2
+
 # CTRL + SHIFT + P to open command line, sql open test.db
 
 Base = declarative_base()
@@ -22,7 +24,13 @@ class DiscordUser(Base):
     timesDucked = Column('timesDucked', Integer, default = 1)
 
 
+# Have to change to work with rasberry pi
+# Planning to host w/ Rasperry Pi, Heroku doesn't work with database well
+
 # engine = create_engine('sqlite:///users.db', echo=True)
+
+conn = psycopg2.connect(DATABASE, sslmode='require')
+
 engine = create_engine(DATABASE, echo=False)
 Base.metadata.create_all(bind=engine)
 
