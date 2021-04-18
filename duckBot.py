@@ -14,7 +14,9 @@ import psycopg2
 
 Base = declarative_base()
 
-DATABASE = os.getenv("DATABASE_URL")
+# DATABASE = os.getenv("DATABASE_URL")
+DATABASE = 'postgresql://mrsakxiwlghqjb:9422c75f108007d4b08108af3ef18139cb772297d8b99a5c9acacd9f76f65e8e@ec2-3-234-85-177.compute-1.amazonaws.com:5432/d6ft8e3ffr4u9h'
+
 
 class DiscordUser(Base):
     __tablename__ = "discorduser"
@@ -29,14 +31,18 @@ class DiscordUser(Base):
 
 # engine = create_engine('sqlite:///users.db', echo=True)
 
-conn = psycopg2.connect(DATABASE, sslmode='require')
+# conn = psycopg2.connect(DATABASE, sslmode='require')
 
+
+# Can comment out
 engine = create_engine(DATABASE, echo=False)
 Base.metadata.create_all(bind=engine)
 
 Session = sessionmaker(bind=engine)
 
 session = Session()
+
+
 
 # user = DiscordUser()
 # user.name = "Tester"
