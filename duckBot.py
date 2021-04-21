@@ -120,8 +120,10 @@ async def on_message(message):
         # users = session.query(DiscordUser).all()
         users = session.query(DiscordUser).order_by(DiscordUser.timesDucked.desc())
         # users = duckLogger.getInfo()
-        for user in users:
-            send = send + f'{user.name} has devoted {user.timesDucked} times\n'
+        for i in range(len(users)):
+            send = send + f'{i + 1}. {users[i].name} has devoted {users[i].timesDucked} times\n'
+        # for user in users:
+        #     send = send + f'{user.name} has devoted {user.timesDucked} times\n'
         await message.channel.send(send)
 
     if message.content == "H":
