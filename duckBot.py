@@ -117,7 +117,8 @@ async def on_message(message):
         if message.channel.name == "temple":
             return
         send = ""
-        users = session.query(DiscordUser).all()
+        # users = session.query(DiscordUser).all()
+        users = session.query(DiscordUser).order_by(DiscordUser.timesDucked.desc())
         # users = duckLogger.getInfo()
         for user in users:
             send = send + f'{user.name} has devoted {user.timesDucked} times\n'
