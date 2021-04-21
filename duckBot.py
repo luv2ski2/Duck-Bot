@@ -120,7 +120,7 @@ async def on_message(message):
         # users = session.query(DiscordUser).all()
         users = session.query(DiscordUser).order_by(DiscordUser.timesDucked.desc())
         # users = duckLogger.getInfo()
-        for i in range(len(users)):
+        for i in range(session.query(DiscordUser).count()):
             send = send + f'{i + 1}. {users[i].name} has devoted {users[i].timesDucked} times\n'
         # for user in users:
         #     send = send + f'{user.name} has devoted {user.timesDucked} times\n'
