@@ -97,8 +97,10 @@ def inDatabase(name, users):
 
 @client.event
 async def on_ready():
-    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="Revenge of the Sith, in other words the greatest movie ever created."))
+    # await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="Revenge of the Sith, in other words the greatest movie ever created."))
     # await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name='My amazing King James UwU <3'))
+    await client.change_presence(
+        activity=discord.Activity(type=discord.ActivityType.watching, name='My lands get destroyed on turn 2 by a bully'))
 
     print(f'{client.user} has connected to Discord!')
 
