@@ -17,7 +17,7 @@ Base = declarative_base()
 # DATABASE = os.getenv("DATABASE_URL")
 # DATABASE = os.environ.get('DATABASE_URL?sslmode=require')
 
-DATABASE = os.getenv("DATABASE")
+DATABASE = os.getenv("DATABASE_URL")
 
 class DiscordUser(Base):
     __tablename__ = "discorduser"
